@@ -44,14 +44,53 @@ export default class ClienteCtrl{
     }
 
     editar(requisicao,resposta){
-
+        resposta.type("application/json");
+        if(requisicao.method == 'PUT' && requisicao.is("application/json")){
+            const codigo = requisicao.params.codigo;
+            const nome = requisicao.body.nome;
+            const cpf = requisicao.body.cpf;
+            const email = requisicao.body.email;
+            const telefone = requisicao.body.telefone;
+            const endereco = requisicao.body.endereco;
+            if(codigo > 0 && nome && cpf && email && telefone && endereco){
+                const cliente = new Cliente(codigo,nome, cpf, telefone, email, endereco);
+                cliente.editar().then(()=>{
+                    resposta.status(200).json({
+                        status:true,
+                        mensagem:"Cliente editado com sucesso!"
+                    });
+                })
+            }
+        }
     }
 
     excluir(requisicao,resposta){
-
+        resposta.type("application/json");
+        if(requisicao.method == 'DELETE' && requisicao.is("application/json")){
+            const codigo = requisicao.params.codigo;
+            if(codigo > 0){
+                const cliente = new Cliente(codigo);
+                cliente.excluir().then(()=>{
+                    resposta.status(200).json({
+                        status:true,
+                        mensagem:"Cliente excluído com sucesso!"
+                    });
+                })
+            }
+        }
     }
 
     consultar(requisicao, resposta){
-        
+        resposta.type("application/json");
+        if(requisicao.method == "GET"){
+            const codigo = requisicao.params.codigo;
+            if(codigo > 0){
+                codigo = ""
+            }
+            const cliente = new Cliente();
+            cliente.consultar(codigo).then((resultado) => {
+                resposta.status(200).json(resultado);
+                })
+        }
     }
 }

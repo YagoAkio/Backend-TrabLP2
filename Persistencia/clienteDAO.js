@@ -1,3 +1,4 @@
+import Categoria from "../Modelo/categoria.js";
 import Cliente from "../Modelo/cliente.js";
 import conectar from "./Conexao.js";
 
@@ -51,14 +52,66 @@ export default class ClienteDAO {
     }
 
     async editar(cliente){
-
+        if(cliente instanceof Cliente){
+            const conexao = await conectar();
+            const sql = `UPDATE cliente SET 
+                            nome = ?,
+                            cpf = ?,
+                            telefone = ?,
+                            email = ?,
+                            endereco = ?
+                            WHERE codigo = ?
+                        `;
+            const parametros = [cliente.nome,
+                                cliente.cpf,
+                                cliente.telefone,
+                                cliente.email,
+                                cliente.endereco,
+                                cliente.codigo
+                                ];
+            await conexao.execute(sql,parametros);
+            await conexao.release();
+        }else{
+            console.log("Erro ao alterar, parametro informado não é compativel com Cliente.")
+        }
     }
 
     async excluir(categoria){
-
+        if(categoria instanceof Cliente){
+            const conexao = await conectar();
+            const sql = `DELETE FROM cliente WHERE codigo = ?`
+            const parametros = [categoria.codigo];
+            await conexao.execute(sql,parametros);
+            await conexao.release();
+        }else{
+            console.log("Erro ao excluir, parametro informado não é compativel com Cliente.")
+        }
     }
 
     async consultar(termo){
+        let sql = "";
+        let parametros = [];
+        if(isNaN(parseInt(termo))){
+            sql = `SELECT * FROM cliente WHERE cpf LIKE ? ORDER BY nome`;
+            parametros.push("%"+termo+"%");
+        }else{
+            sql = `SELECT * FROM cliente WHERE codigo = ? OR cpf = ? ORDER BY nome`;
+            parametros.push(termo);
+        }
+        const conexao = await conectar();
 
+        const [registros, campos] = await conexao.query(sql,parametros);
+        let listaCliente = [];
+        for(const registro of registros){
+            const cliente = new Cliente(registro.codigo,
+                                            registro.nome,
+                                            registro.cpf,
+                                            registro.telefone,
+                                            registro.email,
+                                            registro.endereco
+                                        );
+            listaCliente.push(cliente);
+        }
+        return listaCliente;
     }
 }
