@@ -1,4 +1,4 @@
-
+import FornecedorDAO from "../Persistencia/fornecedorDAO.js";
 
 export default class Fornecedor {
     #codigo;
@@ -77,5 +77,25 @@ export default class Fornecedor {
             email: this.#email,
             endereco: this.#endereco
         };
+    }
+
+    async gravar(){
+        const fornecedorDAO = new FornecedorDAO();
+        await fornecedorDAO.gravar(this);
+    }
+
+    async editar(){
+        const fornecedorDAO = new FornecedorDAO();
+        await fornecedorDAO.editar(this);
+    }
+
+    async excluir(){
+        const fornecedorDAO = new FornecedorDAO();
+        await fornecedorDAO.excluir(this);
+    }
+
+    async consultar(termo){
+        const fornecedorDAO = new FornecedorDAO();
+        return await fornecedorDAO.consultar(termo);
     }
 }

@@ -26,7 +26,7 @@ export default class ClienteDAO {
             await conexao.release();
         }
         catch(erro){
-            console.log("Erro ao iniciar a tebela categoria!");
+            console.log("Erro ao iniciar a tebela cliente!");
         }
     }
 
@@ -76,11 +76,11 @@ export default class ClienteDAO {
         }
     }
 
-    async excluir(categoria){
-        if(categoria instanceof Cliente){
+    async excluir(cliente){
+        if(cliente instanceof Cliente){
             const conexao = await conectar();
             const sql = `DELETE FROM cliente WHERE codigo = ?`
-            const parametros = [categoria.codigo];
+            const parametros = [cliente.codigo];
             await conexao.execute(sql,parametros);
             await conexao.release();
         }else{
