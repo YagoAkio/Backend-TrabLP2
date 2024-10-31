@@ -1,4 +1,4 @@
-
+import FuncionarioDAO from "../Persistencia/funcionarioDAO.js";
 
 export default class Funcionario {
     #codigo;
@@ -110,5 +110,25 @@ export default class Funcionario {
             salario: this.#salario,
             dataAdmissao: this.#dataAdmissao
         };
+    }
+
+    async gravar(){
+        const funcionarioDAO = new FuncionarioDAO();
+        await funcionarioDAO.gravar(this);
+    }
+
+    async editar(){
+        const funcionarioDAO = new FuncionarioDAO();
+        await funcionarioDAO.editar(this);
+    }
+
+    async excluir(){
+        const funcionarioDAO = new FuncionarioDAO();
+        await funcionarioDAO.excluir(this);
+    }
+
+    async consultar(termo){
+        const funcionarioDAO = new FuncionarioDAO();
+        return await funcionarioDAO.consultar(termo);
     }
 }

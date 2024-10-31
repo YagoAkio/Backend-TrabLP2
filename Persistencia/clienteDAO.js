@@ -92,10 +92,10 @@ export default class ClienteDAO {
         let sql = "";
         let parametros = [];
         if(isNaN(parseInt(termo))){
-            sql = `SELECT * FROM cliente WHERE cpf LIKE ? ORDER BY nome`;
+            sql = `SELECT * FROM cliente WHERE nome LIKE ? ORDER BY nome`;
             parametros.push("%"+termo+"%");
         }else{
-            sql = `SELECT * FROM cliente WHERE codigo = ? OR cpf = ? ORDER BY nome`;
+            sql = `SELECT * FROM cliente WHERE codigo = ? ORDER BY nome`;
             parametros.push(termo);
         }
         const conexao = await conectar();

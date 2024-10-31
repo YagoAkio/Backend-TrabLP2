@@ -24,7 +24,7 @@ export default class ClienteCtrl{
                 .catch((erro)=>{
                     resposta.status(500).json({
                         status:false,
-                        mensagem:"Não foi possível incluir a categoria: " + erro.message
+                        mensagem:"Não foi possível incluir a funcionario: " + erro.message
                     });
                 });
             }
