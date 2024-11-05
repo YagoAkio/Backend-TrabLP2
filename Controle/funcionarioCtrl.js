@@ -76,9 +76,7 @@ export default class FuncionarioCtrl{
         resposta.type("application/json");
         if(requisicao.method == "GET"){
             const codigo = requisicao.params.codigo;
-            if(codigo > 0){
-                codigo = ""
-            }
+            
             const funcionario = new Funcionario();
             funcionario.consultar(codigo).then((resultado) => {
                 resposta.status(200).json(resultado);

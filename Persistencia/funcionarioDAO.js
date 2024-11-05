@@ -21,8 +21,8 @@ export default class FuncionarioDAO {
                     cargo VARCHAR(255) NOT NULL,
                     salario DECIMAL(10,2) NOT NULL,
                     data_admissao DATE NOT NULL,
-                    CONSTRAINT pk_funcionario PRIMARY KEY(codigo),
-                    UNIQUE KEY cpf (cpf)
+                    CONSTRAINT pk_funcionario PRIMARY KEY (codigo),
+                    CONSTRAINT unique_cpf UNIQUE (cpf)
                 );
             `
             await conexao.execute(sql);
@@ -95,7 +95,7 @@ export default class FuncionarioDAO {
         if(funcionario instanceof Funcionario){
             const conexao = await conectar();
             const sql = `DELETE FROM funcionario WHERE codigo = ?`
-            const parametros = [funcionario.codigo];
+            const parametros = [funcionario.codigo,];
             await conexao.execute(sql,parametros);
             await conexao.release();
         }
@@ -106,10 +106,10 @@ export default class FuncionarioDAO {
         let parametros = [];
         if(isNaN(parseInt(termo))){
             sql = `SELECT * FROM funcionario WHERE nome LIKE ? ORDER BY nome`;
-            parametros.push = ["%"+termo+"%"];
+            parametros.push("%"+termo+"%");
         }else{
             sql = `SELECT * FROM funcionario WHERE codigo = ? ORDER BY salario`;
-            parametros.push = [termo];
+            parametros.push(termo);
         }
         
         const conexao = await conectar();
