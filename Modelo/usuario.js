@@ -1,18 +1,16 @@
-
+import UsuarioDAO from "../Persistencia/usuarioDAO.js";
 
 export default class Usuario {
     #codigo;
     #email;
     #senha;
-    #funcionario;
-    #cliente;
+    #prio;
 
-    constructor(codigo = 0, email = "", senha = "", funcionario = {}, cliente = {}) {
+    constructor(codigo = 0, email = "", senha = "", prio = 0) {
         this.#codigo = codigo;
         this.#email = email;
         this.#senha = senha;
-        this.#funcionario = funcionario;
-        this.#cliente = cliente;
+        this.#prio = prio;
     }
 
     // Métodos get
@@ -20,7 +18,7 @@ export default class Usuario {
         return this.#codigo;
     }
 
-    get email() {
+    get email(){
         return this.#email;
     }
 
@@ -28,12 +26,8 @@ export default class Usuario {
         return this.#senha;
     }
 
-    get funcionario() {
-        return this.#funcionario;
-    }
-
-    get cliente() {
-        return this.#cliente;
+    get prio() {
+        return this.#prio;
     }
 
     // Métodos set
@@ -41,7 +35,7 @@ export default class Usuario {
         this.#codigo = codigo;
     }
 
-    set email(email) {
+    set email(email){
         this.#email = email;
     }
 
@@ -49,22 +43,40 @@ export default class Usuario {
         this.#senha = senha;
     }
 
-    set funcionario(funcionario) {
-        this.#funcionario = funcionario;
-    }
+    
 
-    set cliente(cliente) {
-        this.#cliente = cliente;
+    set prio(prio) {
+        this.#prio = prio;
     }
 
     // Método toJSON
     toJSON() {
         return {
             codigo: this.#codigo,
-            email: this.#email,
+            email: this.email,
             senha: this.#senha,
-            funcionario: this.#funcionario,
-            cliente: this.#cliente
+            prio: this.#prio
         };
+    }
+
+    async gravar(){
+        //instanciar a camada de persistencia do produto
+        const usuarioDAO = new UsuarioDAO();
+        await usuarioDAO.gravar(this); //this referência a si mesmo
+    }
+
+    async consultar(termo){
+        const usuarioDAO = new UsuarioDAO();
+        return await usuarioDAO.consultar(termo);
+    }
+
+    async excluir(){
+        const usuarioDAO = new UsuarioDAO();
+        await usuarioDAO.excluir(this);
+    }
+
+    async editar(){
+        const usuarioDAO = new UsuarioDAO();
+        await usuarioDAO.editar(this);
     }
 }

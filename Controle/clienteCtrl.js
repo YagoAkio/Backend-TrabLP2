@@ -83,9 +83,9 @@ export default class ClienteCtrl{
     consultar(requisicao, resposta){
         resposta.type("application/json");
         if(requisicao.method == "GET"){
-            const codigo = requisicao.params.codigo;
-            if(codigo > 0){
-                codigo = ""
+            let codigo = requisicao.params.codigo;
+            if(isNaN(codigo)){
+                codigo = "";
             }
             const cliente = new Cliente();
             cliente.consultar(codigo).then((resultado) => {
