@@ -112,6 +112,7 @@ export default class ClienteDAO {
                                         );
             listaCliente.push(cliente);
         }
+        await conexao.release();
         return listaCliente;
     }
 }

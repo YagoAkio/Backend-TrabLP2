@@ -4,9 +4,6 @@
   "description": "Exemplo de um servidor http",
   "main": "index.js",
   "type": "module",
-  "engines": {
-    "node": "14.x"
-  },
   "scripts": {
     "start": "node index.js",
     "test": "echo Nenhum comando de teste foi especificado."
@@ -19,7 +16,7 @@
     "querido",
     "aluno"
   ],
-  "author": "Renato",
+  "author": "YagoAkio",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",

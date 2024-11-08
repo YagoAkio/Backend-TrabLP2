@@ -110,6 +110,7 @@ export default class FornecedorDAO {
                                         );
             listaFornecedor.push(fornecedor);
         }
+        await conexao.release();
         return listaFornecedor;
     }
 }

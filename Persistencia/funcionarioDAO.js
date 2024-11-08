@@ -130,6 +130,7 @@ export default class FuncionarioDAO {
             );
             listaFuncionario.push(cliente);
         }
+        await conexao.release();
         return listaFuncionario;
     }
 }

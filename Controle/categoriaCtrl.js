@@ -150,7 +150,7 @@ export default class CategoriaCtrl{
         if (requisicao.method=="GET"){
             let codigo = requisicao.params.codigo;
             //evitar que código tenha valor undefined
-            if (isNaN(codigo)){
+            if (!codigo){
                 codigo = "";
             }
 

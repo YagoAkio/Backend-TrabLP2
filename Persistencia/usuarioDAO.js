@@ -78,6 +78,7 @@ export default class UsuarioDAO {
             );
             listaUsuario.push(usuario);
         }
+        await conexao.release();
         return listaUsuario;
     }
 }

@@ -16,9 +16,13 @@ export default async function conectar(){
             "database":"LP2_102215537",
             "user":"102215537",
             "password":"102215537",
-            "connectTimeout":60000,
-            "waitForConnections":true,
-            "queueLimit":20
+            waitForConnections: true,
+            connectionLimit: 10,
+            maxIdle: 10, // Máximo de conexões inativas; o valor padrão é o mesmo que "connectionLimit"
+            idleTimeout: 60000, // Tempo limite das conexões inativas em milissegundos; o valor padrão é "60000"
+            queueLimit: 0,
+            enableKeepAlive: true,
+            keepAliveInitialDelay: 0
         });
         return await global.poolConexoes.getConnection();
     }
