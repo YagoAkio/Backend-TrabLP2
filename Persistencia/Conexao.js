@@ -17,7 +17,7 @@ export default async function conectar(){
             "user":"102215537",
             "password":"102215537",
             waitForConnections: true,
-            connectionLimit: 10,
+            connectionLimit: 20,
             maxIdle: 10, // Máximo de conexões inativas; o valor padrão é o mesmo que "connectionLimit"
             idleTimeout: 60000, // Tempo limite das conexões inativas em milissegundos; o valor padrão é "60000"
             queueLimit: 0,
