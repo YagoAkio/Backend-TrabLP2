@@ -84,7 +84,7 @@ export default class ClienteCtrl{
         resposta.type("application/json");
         if(requisicao.method == "GET"){
             let codigo = requisicao.params.codigo;
-            if(isNaN(codigo)){
+            if(!codigo){
                 codigo = "";
             }
             const cliente = new Cliente();
