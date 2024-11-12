@@ -87,7 +87,7 @@ export default class FornecedorCtrl{
 
     consultar(requisicao, resposta){
         resposta.type("application/json");
-        if(requisicao.method == 'GET' && requisicao.is("application/json")){
+        if(requisicao.method == 'GET'){
             let codigo = requisicao.params.codigo;
             if(!codigo){
                 codigo = "";
