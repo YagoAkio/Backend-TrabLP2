@@ -95,17 +95,9 @@ export default class FornecedorCtrl{
            
             const fornecedor = new Fornecedor();
             
-            fornecedor.consultar(codigo)
-            .then((listaFornecedor)=>{
-                resposta.status(200).json(listaFornecedor);
+            fornecedor.consultar(codigo).then((resultado)=>{
+                resposta.status(200).json(resultado);
             })
-            .catch((erro)=>{
-                resposta.status(500).json({
-                    status:false,
-                    mensagem:"Não foi possível incluir a fornecedor: " + erro.message
-                });
-            });
-            
         }
     }
 }
